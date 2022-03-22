@@ -1,9 +1,6 @@
 package mara.beautyandhealthcare.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
@@ -12,13 +9,18 @@ public class Comment {
     private Long id;  //nume de fields
     private String name;
     private String text;
-    private Instant date;
+    private Instant date = Instant.now();
+    @Enumerated(EnumType.STRING)
+    private Rating rating;
 
-    public Comment (Long id, String name, String text, Instant date){   // aici sunt valorile propriu zise date de useri
+
+
+    public Comment (Long id, String name, String text, Instant date, Rating rating){   // aici sunt valorile propriu zise date de useri
         this.id = id; // primu id e de la linia 6, unde e spatiu propriu-zis si al 2lea e valoarea atribuita :))
         this.name = name; // this acceseaza valoarea clasei strict deci daca vreau sa accesez aloarea clasei o accesez cu this:))
         this.text = text;
         this.date = date;
+        this.rating = rating;
     }
 
     public Comment(){} // e un constructor gol pe car -l vom folosi in caz ca vreau sa-i dau valori in main cu get si set si atunci ca sa pot sa-i pun valorii trebuie sa fie gol
@@ -52,6 +54,13 @@ public class Comment {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 }
 
